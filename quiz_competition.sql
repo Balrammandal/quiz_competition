@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2021 at 04:45 PM
+-- Generation Time: Dec 15, 2021 at 06:05 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.14
 
@@ -426,7 +426,8 @@ CREATE TABLE `model_has_roles` (
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\User', 1),
 (2, 'App\\User', 3),
-(2, 'App\\User', 4);
+(2, 'App\\User', 4),
+(3, 'App\\User', 5);
 
 -- --------------------------------------------------------
 
@@ -492,7 +493,8 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
 (1, 'admin', 'web', '2021-12-14 12:07:53', '2021-12-14 12:07:53'),
-(2, 'user', 'web', '2021-12-14 12:18:23', '2021-12-14 12:18:23');
+(2, 'user', 'web', '2021-12-14 12:18:23', '2021-12-14 12:18:23'),
+(3, 'teacher', 'web', '2021-12-15 10:50:05', '2021-12-15 10:50:05');
 
 -- --------------------------------------------------------
 
@@ -4631,11 +4633,21 @@ CREATE TABLE `subscription_plans` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `validity` int(11) DEFAULT NULL,
   `validity_type` enum('Days','Months','Year') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Days',
+  `price` float(8,2) NOT NULL DEFAULT 0.00,
   `status` enum('Active','Inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subscription_plans`
+--
+
+INSERT INTO `subscription_plans` (`id`, `name`, `validity`, `validity_type`, `price`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Silver', 30, 'Days', 250.00, 'Active', '2021-12-15 11:18:18', '2021-12-15 11:34:43', NULL),
+(2, 'Gold', 6, 'Months', 500.00, 'Active', '2021-12-15 11:18:45', '2021-12-15 11:34:33', NULL),
+(3, 'Premium Plan', 1, 'Year', 1000.00, 'Active', '2021-12-15 11:20:25', '2021-12-15 11:34:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -4671,8 +4683,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `api_token`, `phone`, `address`, `city`, `latitude`, `longitude`, `country_id`, `state_id`, `zip_code`, `image`, `status`, `user_type`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$u2EmvIMPnbXqOsA9wNYnZul9xK3TgXg6Jqw1vc2j1qFhnqiSHgA2m', NULL, '1234567890', 'Durgapur', NULL, '10.1010', '12.1010', NULL, NULL, NULL, NULL, 'Active', 'Admin', NULL, '2021-12-14 12:07:54', '2021-12-14 12:25:16'),
-(4, 'Balram Kumar Mandal', 'balrammandal50@gmail.com', NULL, '$2y$10$wSuuCgZyug6eR5HYK/rhNOp6QfymxZB/n1CBRBADp8k36YPGsMxlO', 'L5V1BAGrGPq7Uhih7qqsMWKKRUvAByGKw4EQZFqKnpAdlTWwETeBEXuAEpgO', '+919708697917', 'VILLAGE - JHAGRAHI', 'KATRAS', NULL, NULL, '101', '16', '828125', NULL, 'Active', 'User', NULL, '2021-12-14 12:22:46', '2021-12-14 12:24:04');
+(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$u2EmvIMPnbXqOsA9wNYnZul9xK3TgXg6Jqw1vc2j1qFhnqiSHgA2m', NULL, '1234567890', 'Durgapur', NULL, '10.1010', '12.1010', NULL, NULL, NULL, NULL, 'Active', 'Admin', 'RktboHpeyVnD4VVb79BMcn6gGkn3Tr4Ch8pT0QutJnV9r9FuLxFSDrkEAiOh', '2021-12-14 12:07:54', '2021-12-14 12:25:16'),
+(4, 'Balram Kumar Mandal', 'balrammandal50@gmail.com', NULL, '$2y$10$wSuuCgZyug6eR5HYK/rhNOp6QfymxZB/n1CBRBADp8k36YPGsMxlO', 'L5V1BAGrGPq7Uhih7qqsMWKKRUvAByGKw4EQZFqKnpAdlTWwETeBEXuAEpgO', '+919708697917', 'VILLAGE - JHAGRAHI', 'KATRAS', NULL, NULL, '101', '16', '828125', NULL, 'Active', 'User', NULL, '2021-12-14 12:22:46', '2021-12-14 12:24:04'),
+(5, 'Teacher 1', 'teacher@gmail.com', NULL, '$2y$10$YNaC8JolmnisrFpsodjsgeeKrcUSwmhuzVhXailz4VsuU8BwPKZSa', 'aIL4yspjf9ykpJwGHWItKalU2Kx1fww7d79kk65Zi3TMj9cROeLWIkcmCZEG', '5685668585', 'Kolkata', 'kolkata', NULL, NULL, '101', '41', '713206', NULL, 'Active', 'Teacher', NULL, '2021-12-15 10:50:04', '2021-12-15 10:51:39');
 
 -- --------------------------------------------------------
 
@@ -4688,6 +4701,7 @@ CREATE TABLE `users_subscriptions` (
   `purchase_date` date DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
+  `total_price` float(8,2) NOT NULL DEFAULT 0.00,
   `payment_status` enum('Pending','Completed','Failed') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Pending',
   `txn_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` enum('Active','Expired','Canceled') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Active',
@@ -4884,7 +4898,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `states`
@@ -4896,13 +4910,13 @@ ALTER TABLE `states`
 -- AUTO_INCREMENT for table `subscription_plans`
 --
 ALTER TABLE `subscription_plans`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users_subscriptions`

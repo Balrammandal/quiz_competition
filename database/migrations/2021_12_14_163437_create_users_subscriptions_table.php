@@ -15,6 +15,7 @@ class CreateUsersSubscriptionsTable extends Migration {
 			$table->date('purchase_date')->nullable();
 			$table->date('start_date')->nullable();
 			$table->date('end_date')->nullable();
+			$table->float('total_price',8,2)->default(0.00);
 			$table->enum('payment_status', array('Pending', 'Completed', 'Failed'))->default('Pending');
 			$table->string('txn_id')->nullable();
 			$table->enum('status', array('Active', 'Expired', 'Canceled'))->default('Active');

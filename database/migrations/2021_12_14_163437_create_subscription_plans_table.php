@@ -12,6 +12,7 @@ class CreateSubscriptionPlansTable extends Migration {
 			$table->string('name')->nullable();
 			$table->integer('validity')->nullable();
 			$table->enum('validity_type', array('Days','Months', 'Year'))->default('Days');
+			$table->float('price',8,2)->default(0.00);
 			$table->enum('status', array('Active', 'Inactive'))->default('Active');
 			$table->timestamps();
 			$table->softDeletes();

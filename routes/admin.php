@@ -15,4 +15,23 @@ Route::group(['as'=>'admin::','prefix'=>'admin','middleware' => ['role:admin']],
     Route::get('delete-user/{id}','Admin\UserController@delete')->name('deleteUser');
     Route::post('active-inactive-user/','Admin\UserController@status')->name('userStatus');
     /* Users route end*/
+    /* Teacher route start*/
+    Route::get('manage-teacher','Admin\UserController@manageTeacher')->name('manageTeacher');
+    Route::get('add-teacher','Admin\UserController@addTeacher')->name('addTeacher');
+    Route::post('save-teacher','Admin\UserController@saveTeacher')->name('saveTeacher');
+    Route::get('edit-teacher/{id}','Admin\UserController@editTeacher')->name('editTeacher');
+    Route::post('update-teacher/{id}','Admin\UserController@updateTeacher')->name('updateTeacher');
+    Route::get('delete-teacher/{id}','Admin\UserController@deleteTeacher')->name('deleteTeacher');
+    Route::post('active-inactive-teacher/','Admin\UserController@teacherStatus')->name('teacherStatus');
+    /* Teacher route end*/
+
+    /* Subscription Plan route start*/
+    Route::get('manage-subscription-plan','Admin\SubscriptionController@index')->name('manageSubscription');
+    Route::get('add-subscription-plan','Admin\SubscriptionController@add')->name('addSubscription');
+    Route::post('save-subscription-plan','Admin\SubscriptionController@save')->name('saveSubscription');
+    Route::get('edit-subscription-plan/{id}','Admin\SubscriptionController@edit')->name('editSubscription');
+    Route::post('update-subscription-plan/{id}','Admin\SubscriptionController@update')->name('updateSubscription');
+    Route::get('delete-subscription-plan/{id}','Admin\SubscriptionController@delete')->name('deleteSubscription');
+    Route::post('active-inactive-subscription-plan/','Admin\SubscriptionController@status')->name('subcriptionStatus');
+    /* Subscription Plan route end*/
 });

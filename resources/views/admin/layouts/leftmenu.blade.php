@@ -26,22 +26,30 @@ $segment= Request::segment(2);
                         </p>
                     </a>
                 </li>
-                <li class="nav-item @if($segment=='manage-users') menu-open @endif">
-                    <a href="#" class="nav-link @if($segment=='manage-users') active @endif">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                <li class="nav-item @if($segment=='manage-teacher') menu-open @endif">
+                    <a href="#" class="nav-link @if($segment=='manage-teacher') active @endif">
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
-                            Manage Users
+                            Manage Teacher
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('admin::manageUsers')}}" class="nav-link @if($segment=='manage-users') active @endif">
+                            <a href="{{route('admin::manageTeacher')}}" class="nav-link @if($segment=='manage-teacher') active @endif">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Users</p>
+                                <p>Teachers</p>
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin::manageSubscription')}}" class="nav-link @if($segment=='manage-subscription-plan') active @endif">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p>
+                            Manage Subscription
+                        </p>
+                    </a>
                 </li>
 
             </ul>
