@@ -26,6 +26,11 @@
     <link rel="stylesheet" href="{{asset('/')}}admintheme/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset('/')}}admintheme/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset('/')}}admintheme/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <style>
+        #Datatable{
+            text-align: center;
+        }
+    </style>
     @stack('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2021 at 06:05 PM
+-- Generation Time: Dec 16, 2021 at 12:08 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.14
 
@@ -4647,7 +4647,7 @@ CREATE TABLE `subscription_plans` (
 INSERT INTO `subscription_plans` (`id`, `name`, `validity`, `validity_type`, `price`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Silver', 30, 'Days', 250.00, 'Active', '2021-12-15 11:18:18', '2021-12-15 11:34:43', NULL),
 (2, 'Gold', 6, 'Months', 500.00, 'Active', '2021-12-15 11:18:45', '2021-12-15 11:34:33', NULL),
-(3, 'Premium Plan', 1, 'Year', 1000.00, 'Active', '2021-12-15 11:20:25', '2021-12-15 11:34:54', NULL);
+(3, 'Premium Plan', 1, 'Year', 1000.00, 'Active', '2021-12-15 11:20:25', '2021-12-16 00:46:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -4685,7 +4685,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `api_token`, `phone`, `address`, `city`, `latitude`, `longitude`, `country_id`, `state_id`, `zip_code`, `image`, `status`, `user_type`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$u2EmvIMPnbXqOsA9wNYnZul9xK3TgXg6Jqw1vc2j1qFhnqiSHgA2m', NULL, '1234567890', 'Durgapur', NULL, '10.1010', '12.1010', NULL, NULL, NULL, NULL, 'Active', 'Admin', 'RktboHpeyVnD4VVb79BMcn6gGkn3Tr4Ch8pT0QutJnV9r9FuLxFSDrkEAiOh', '2021-12-14 12:07:54', '2021-12-14 12:25:16'),
 (4, 'Balram Kumar Mandal', 'balrammandal50@gmail.com', NULL, '$2y$10$wSuuCgZyug6eR5HYK/rhNOp6QfymxZB/n1CBRBADp8k36YPGsMxlO', 'L5V1BAGrGPq7Uhih7qqsMWKKRUvAByGKw4EQZFqKnpAdlTWwETeBEXuAEpgO', '+919708697917', 'VILLAGE - JHAGRAHI', 'KATRAS', NULL, NULL, '101', '16', '828125', NULL, 'Active', 'User', NULL, '2021-12-14 12:22:46', '2021-12-14 12:24:04'),
-(5, 'Teacher 1', 'teacher@gmail.com', NULL, '$2y$10$YNaC8JolmnisrFpsodjsgeeKrcUSwmhuzVhXailz4VsuU8BwPKZSa', 'aIL4yspjf9ykpJwGHWItKalU2Kx1fww7d79kk65Zi3TMj9cROeLWIkcmCZEG', '5685668585', 'Kolkata', 'kolkata', NULL, NULL, '101', '41', '713206', NULL, 'Active', 'Teacher', NULL, '2021-12-15 10:50:04', '2021-12-15 10:51:39');
+(5, 'Teacher 1', 'teacher@gmail.com', NULL, '$2y$10$YNaC8JolmnisrFpsodjsgeeKrcUSwmhuzVhXailz4VsuU8BwPKZSa', 'aIL4yspjf9ykpJwGHWItKalU2Kx1fww7d79kk65Zi3TMj9cROeLWIkcmCZEG', '5685668585', 'Kolkata', 'kolkata', NULL, NULL, '101', '41', '713206', NULL, 'Active', 'Teacher', NULL, '2021-12-15 10:50:04', '2021-12-16 00:52:10');
 
 -- --------------------------------------------------------
 
@@ -4708,6 +4708,13 @@ CREATE TABLE `users_subscriptions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users_subscriptions`
+--
+
+INSERT INTO `users_subscriptions` (`id`, `user_id`, `subscription_id`, `subscription_details`, `purchase_date`, `start_date`, `end_date`, `total_price`, `payment_status`, `txn_id`, `status`, `created_at`, `updated_at`) VALUES
+(1, 5, 1, '{}', '2021-12-16', '2021-12-16', '2022-01-16', 1000.00, 'Completed', 'dsfxfx', 'Active', '2021-12-16 10:34:57', '2021-12-16 10:34:57');
 
 --
 -- Indexes for dumped tables
@@ -4874,7 +4881,7 @@ ALTER TABLE `group_questions`
 -- AUTO_INCREMENT for table `levels`
 --
 ALTER TABLE `levels`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -4922,7 +4929,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_subscriptions`
 --
 ALTER TABLE `users_subscriptions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

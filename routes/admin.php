@@ -34,4 +34,18 @@ Route::group(['as'=>'admin::','prefix'=>'admin','middleware' => ['role:admin']],
     Route::get('delete-subscription-plan/{id}','Admin\SubscriptionController@delete')->name('deleteSubscription');
     Route::post('active-inactive-subscription-plan/','Admin\SubscriptionController@status')->name('subcriptionStatus');
     /* Subscription Plan route end*/
+
+    /* Question Level route start*/
+    Route::get('manage-question-level','Admin\LevelController@index')->name('manageQuestionLevel');
+    Route::get('add-question-level','Admin\LevelController@add')->name('addQuestionLevel');
+    Route::post('save-question-level','Admin\LevelController@save')->name('saveQuestionLevel');
+    Route::get('edit-question-level/{id}','Admin\LevelController@edit')->name('editQuestionLevel');
+    Route::post('update-question-level/{id}','Admin\LevelController@update')->name('updateQuestionLevel');
+    Route::get('delete-question-level/{id}','Admin\LevelController@delete')->name('deleteQuestionLevel');
+    Route::post('active-inactive-question-level/','Admin\LevelController@status')->name('QuestionLevelStatus');
+    /* Question Level route end*/
+
+    /* User Subscription route start */
+    Route::get('manage-user-subscription','Admin\UserSubscriptionController@index')->name('manageUserSubscription');
+    Route::get('user-subscription-details/{id}','Admin\UserSubscriptionController@details')->name('UserSubscriptionDetail');
 });

@@ -51,6 +51,22 @@ $segment= Request::segment(2);
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('admin::manageQuestionLevel')}}" class="nav-link @if($segment=='manage-question-level') active @endif">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p>
+                            Manage Question Level
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin::manageUserSubscription')}}" class="nav-link @if($segment=='manage-user-subscription') active @endif">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p>
+                            User Subscriptions
+                        </p>
+                    </a>
+                </li>
 
             </ul>
         </nav>
