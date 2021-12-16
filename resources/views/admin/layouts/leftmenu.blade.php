@@ -63,7 +63,7 @@ $segment= Request::segment(2);
                     <a href="{{route('admin::manageUserSubscription')}}" class="nav-link @if($segment=='manage-user-subscription') active @endif">
                         <i class="nav-icon fas fa-list"></i>
                         <p>
-                            User Subscriptions
+                            Teacher Subscriptions
                         </p>
                     </a>
                 </li>

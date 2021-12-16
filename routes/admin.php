@@ -46,6 +46,6 @@ Route::group(['as'=>'admin::','prefix'=>'admin','middleware' => ['role:admin']],
     /* Question Level route end*/
 
     /* User Subscription route start */
-    Route::get('manage-user-subscription','Admin\UserSubscriptionController@index')->name('manageUserSubscription');
-    Route::get('user-subscription-details/{id}','Admin\UserSubscriptionController@details')->name('UserSubscriptionDetail');
+    Route::get('manage-teacher-subscription','Admin\UserSubscriptionController@index')->name('manageUserSubscription');
+    Route::get('teacher-subscription-details/{id}','Admin\UserSubscriptionController@details')->name('UserSubscriptionDetail');
 });
