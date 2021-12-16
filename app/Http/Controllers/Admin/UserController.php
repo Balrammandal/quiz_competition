@@ -210,7 +210,7 @@ class UserController extends Controller
                 'city.required' => 'Enter City',
                 'country_id.required' => 'Select Country',
                 'state_id.required' => 'Select State',
-                'pin_code.required' => 'Enter Pin Code',
+                'zip_code.required' => 'Enter Pin Code',
             ];
             $this->validate($request, [
                 'name' => 'required',
