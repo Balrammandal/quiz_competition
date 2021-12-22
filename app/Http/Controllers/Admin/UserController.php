@@ -12,10 +12,14 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
 class UserController extends Controller
 {
-    public function index()
+    public function index($type=null)
     {
         if(request()->ajax()) {
-            $data = User::where('user_type','User')->get();
+            if($type!=null){
+                $data = User::where('user_type',$type)->get();
+            }else {
+                $data = User::where('user_type','<>','Admin')->get();
+            }
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('name', function ($data) {
@@ -47,7 +51,7 @@ class UserController extends Controller
                 ->rawColumns(['action'])
                 ->toJson();
         }
-        return view('admin.user.index');
+        return view('admin.user.index',compact('type'));
     }
 
     public function add(){
@@ -59,65 +63,54 @@ class UserController extends Controller
            // dd($request->all());
             $msg = [
                 'name.required' => 'Enter Name',
+                'username.required'=>'Enter User Name',
                 'email.required' => 'Enter Email',
                 'email.unique' => 'Email already exist.',
                 'phone.required' => 'Enter Phone Number',
-                'address.required' => 'Enter Address',
-                'city.required' => 'Enter City',
-                'country_id.required' => 'Select Country',
-                'state_id.required' => 'Select State',
-                'pin_code.required' => 'Enter Pin Code',
+                'user_type.required' => 'Select Account Type',
+                'marital_status.required' => 'Select Marital Status',
+
             ];
             $this->validate($request, [
                 'name' => 'required',
+                'username' => 'required',
                 'email' => 'required|unique:users',
                 'phone' => 'required',
-                'address' => 'required',
-                'city' => 'required',
-                'country_id' => 'required',
-                'state_id' => 'required',
-                'zip_code' => 'required',
+                'user_type' => 'required',
+                'marital_status' => 'required',
             ], $msg);
             $data = $request->except('_token');
             $data["password"] = bcrypt('123456');
-            $data["user_type"] = "User";
             $data["api_token"] = Str::random(60);
             $user = User::create($data);
         //    $admin = new Role();
         //    $admin->name         = 'user';
         //    $admin->save();
-           $user->assignRole(['user']);
+//           $user->assignRole(['user']);
             return redirect()->back()->with('success','User Added Successfully !!!');
     }
     public function edit($id){
         $userById = User::where('id', $id)->first();
-        $countries = Countries::get();
-        $states = States::where("country_id",$userById->country_id)->get();
-        return view('admin.user.edit', compact('userById','countries','states'));
+//        $countries = Countries::get();
+//        $states = States::where("country_id",$userById->country_id)->get();
+        return view('admin.user.edit', compact('userById'));
     }
 
     public function update(Request $request,$id)
     {
         $msg = [
             'name.required' => 'Enter Name',
+            'username.required'=>'Enter User Name',
             'email.required' => 'Enter Email',
             'email.unique' => 'Email already exist.',
             'phone.required' => 'Enter Phone Number',
-            'address.required' => 'Enter Address',
-            'city.required' => 'Enter City',
-            'country_id.required' => 'Select Country',
-            'state_id.required' => 'Select State',
-            'pin_code.required' => 'Enter Pin Code',
+            'user_type.required' => 'Select Account Type',
+            'marital_status.required' => 'Select Marital Status',
         ];
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|unique:users,id,'.$id,
             'phone' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'country_id' => 'required',
-            'state_id' => 'required',
-            'zip_code' => 'required',
         ], $msg);
         $data = $request->except('_token');
         User::where('id',$id)->update($data);

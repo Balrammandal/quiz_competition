@@ -7,7 +7,7 @@ Route::group(['as'=>'admin::','prefix'=>'admin','middleware' => ['role:admin']],
     Route::post('update-profile','Admin\AdminController@updateProfile')->name('updateProfile');
 
     /* Users route start*/
-    Route::get('manage-users','Admin\UserController@index')->name('manageUsers');
+    Route::get('manage-users/{type?}','Admin\UserController@index')->name('manageUsers');
     Route::get('add-user','Admin\UserController@add')->name('addUser');
     Route::post('save-user','Admin\UserController@save')->name('saveUser');
     Route::get('edit-user/{id}','Admin\UserController@edit')->name('editUser');

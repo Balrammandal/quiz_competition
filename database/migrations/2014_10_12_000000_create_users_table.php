@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('zip_code')->nullable();
             $table->string('image')->nullable();
             $table->enum('status',['Active','Inactive'])->default('Active');
-            $table->enum('user_type',['Admin','Teacher','User'])->default('Teacher');
+            $table->enum('user_type',['Admin','Teacher','User',"Students","Other"])->default('Teacher');
             $table->rememberToken();
             $table->timestamps();
         });

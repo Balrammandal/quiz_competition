@@ -39,9 +39,10 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Sl No</th>
-                                <th>User Name</th>
+                                <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                                <th>Account Type</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -59,13 +60,14 @@
             $('#Datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{route('admin::manageUsers')}}',
+                ajax: '{{route('admin::manageUsers',$type)}}',
                 columns: [
                     {data: 'id', name: 'id', 'visible': false},
                     {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false,searchable: false},
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
                     {data: 'phone', name: 'phone'},
+                    {data: 'user_type', name: 'user_type'},
                     {data: 'action', name: 'action', orderable: false, searchable: true}
                 ],
                 "order": [[0,'desc']],

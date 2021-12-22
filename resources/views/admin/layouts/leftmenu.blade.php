@@ -26,19 +26,19 @@ $segment= Request::segment(2);
                         </p>
                     </a>
                 </li>
-                <li class="nav-item @if($segment=='manage-teacher') menu-open @endif">
-                    <a href="#" class="nav-link @if($segment=='manage-teacher') active @endif">
+                <li class="nav-item @if($segment=='manage-users') menu-open @endif">
+                    <a href="#" class="nav-link @if($segment=='manage-users') active @endif">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
-                            Manage Teacher
+                            Manage Users
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('admin::manageTeacher')}}" class="nav-link @if($segment=='manage-teacher') active @endif">
+                            <a href="{{route('admin::manageUsers')}}" class="nav-link @if($segment=='manage-users') active @endif">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Teachers</p>
+                                <p>User</p>
                             </a>
                         </li>
                     </ul>
@@ -51,16 +51,16 @@ $segment= Request::segment(2);
                         </p>
                     </a>
                 </li>
+                {{--<li class="nav-item">--}}
+                    {{--<a href="{{route('admin::manageQuestionLevel')}}" class="nav-link @if($segment=='manage-question-level') active @endif">--}}
+                        {{--<i class="nav-icon fas fa-list"></i>--}}
+                        {{--<p>--}}
+                            {{--Manage Question Level--}}
+                        {{--</p>--}}
+                    {{--</a>--}}
+                {{--</li>--}}
                 <li class="nav-item">
-                    <a href="{{route('admin::manageQuestionLevel')}}" class="nav-link @if($segment=='manage-question-level') active @endif">
-                        <i class="nav-icon fas fa-list"></i>
-                        <p>
-                            Manage Question Level
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('admin::manageUserSubscription')}}" class="nav-link @if($segment=='manage-user-subscription') active @endif">
+                    <a href="{{route('admin::manageUserSubscription')}}" class="nav-link @if($segment=='manage-teacher-subscription') active @endif">
                         <i class="nav-icon fas fa-list"></i>
                         <p>
                             Teacher Subscriptions
