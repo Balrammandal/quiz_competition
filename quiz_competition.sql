@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2021 at 07:58 PM
+-- Generation Time: Dec 23, 2021 at 06:15 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.14
 
@@ -291,6 +291,30 @@ INSERT INTO `countries` (`id`, `sortname`, `name`, `phonecode`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `coupons`
+--
+
+CREATE TABLE `coupons` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `coupon_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_type` enum('Flat','Percentage') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Flat',
+  `amount` double(8,2) NOT NULL DEFAULT 0.00,
+  `status` enum('Active','Inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `coupons`
+--
+
+INSERT INTO `coupons` (`id`, `coupon_code`, `discount_type`, `amount`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'FLAT10', 'Flat', 10.00, 'Active', '2021-12-23 11:07:42', '2021-12-23 11:09:22'),
+(2, 'SAVE10', 'Percentage', 10.00, 'Active', '2021-12-23 11:07:57', '2021-12-23 11:07:57');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `failed_jobs`
 --
 
@@ -365,6 +389,15 @@ CREATE TABLE `levels` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `levels`
+--
+
+INSERT INTO `levels` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Easy', 'Active', '2021-12-16 10:11:40', '2021-12-16 10:11:40'),
+(2, 'Medium', 'Active', '2021-12-16 10:11:48', '2021-12-16 10:11:48'),
+(3, 'Hard', 'Active', '2021-12-16 10:11:54', '2021-12-16 10:11:54');
+
 -- --------------------------------------------------------
 
 --
@@ -394,7 +427,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (22, '2021_12_14_163437_create_subscription_plans_table', 1),
 (23, '2021_12_14_163437_create_users_subscriptions_table', 1),
 (24, '2021_12_14_163447_create_foreign_keys', 1),
-(25, '2021_12_22_165651_add_username_to_users_table', 2);
+(25, '2021_12_22_165651_add_username_to_users_table', 2),
+(26, '2021_12_23_160547_create_coupons_table', 3);
 
 -- --------------------------------------------------------
 
@@ -428,7 +462,8 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\User', 1),
 (2, 'App\\User', 3),
 (2, 'App\\User', 4),
-(3, 'App\\User', 5);
+(3, 'App\\User', 5),
+(3, 'App\\User', 6);
 
 -- --------------------------------------------------------
 
@@ -4648,7 +4683,7 @@ CREATE TABLE `subscription_plans` (
 INSERT INTO `subscription_plans` (`id`, `name`, `validity`, `validity_type`, `price`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Silver', 30, 'Days', 250.00, 'Active', '2021-12-15 11:18:18', '2021-12-15 11:34:43', NULL),
 (2, 'Gold', 6, 'Months', 500.00, 'Active', '2021-12-15 11:18:45', '2021-12-15 11:34:33', NULL),
-(3, 'Premium Plan', 1, 'Year', 1000.00, 'Active', '2021-12-15 11:20:25', '2021-12-16 00:46:43', NULL);
+(3, 'Premium Plan', 1, 'Year', 1000.00, 'Active', '2021-12-15 11:20:25', '2021-12-15 11:34:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -4674,7 +4709,7 @@ CREATE TABLE `users` (
   `zip_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` enum('Active','Inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Active',
-  `user_type` enum('Admin','Teacher','User','Students','Other') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Teacher',
+  `user_type` enum('Admin','Teacher','Students','Other') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Teacher',
   `marital_status` enum('Married','Unmarried') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -4686,9 +4721,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `password`, `api_token`, `phone`, `address`, `city`, `latitude`, `longitude`, `country_id`, `state_id`, `zip_code`, `image`, `status`, `user_type`, `marital_status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$u2EmvIMPnbXqOsA9wNYnZul9xK3TgXg6Jqw1vc2j1qFhnqiSHgA2m', NULL, '1234567890', 'Durgapur', NULL, '10.1010', '12.1010', NULL, NULL, NULL, NULL, 'Active', 'Admin', NULL, 'RktboHpeyVnD4VVb79BMcn6gGkn3Tr4Ch8pT0QutJnV9r9FuLxFSDrkEAiOh', '2021-12-14 12:07:54', '2021-12-14 12:25:16'),
-(4, 'Balram Kumar Mandal', NULL, 'balrammandal50@gmail.com', NULL, '$2y$10$wSuuCgZyug6eR5HYK/rhNOp6QfymxZB/n1CBRBADp8k36YPGsMxlO', 'L5V1BAGrGPq7Uhih7qqsMWKKRUvAByGKw4EQZFqKnpAdlTWwETeBEXuAEpgO', '+919708697917', 'VILLAGE - JHAGRAHI', 'KATRAS', NULL, NULL, '101', '16', '828125', NULL, 'Active', 'User', NULL, NULL, '2021-12-14 12:22:46', '2021-12-14 12:24:04'),
-(5, 'Teacher 1', NULL, 'teacher@gmail.com', NULL, '$2y$10$YNaC8JolmnisrFpsodjsgeeKrcUSwmhuzVhXailz4VsuU8BwPKZSa', 'aIL4yspjf9ykpJwGHWItKalU2Kx1fww7d79kk65Zi3TMj9cROeLWIkcmCZEG', '5685668585', 'Kolkata', 'kolkata', NULL, NULL, '101', '41', '713206', NULL, 'Active', 'Teacher', NULL, NULL, '2021-12-15 10:50:04', '2021-12-17 01:50:07');
+(1, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$u2EmvIMPnbXqOsA9wNYnZul9xK3TgXg6Jqw1vc2j1qFhnqiSHgA2m', NULL, '1234567890', 'Durgapur', NULL, '10.1010', '12.1010', NULL, NULL, NULL, NULL, 'Active', 'Admin', NULL, 'tWi38fRgcU7dRS6nUliy2Tkf0tfMb7YJi4Z7L9a7szTMU5tnRNDnN5xWFhlE', '2021-12-14 12:07:54', '2021-12-14 12:25:16'),
+(5, 'Teacher 1', NULL, 'teacher@gmail.com', NULL, '$2y$10$YNaC8JolmnisrFpsodjsgeeKrcUSwmhuzVhXailz4VsuU8BwPKZSa', 'aIL4yspjf9ykpJwGHWItKalU2Kx1fww7d79kk65Zi3TMj9cROeLWIkcmCZEG', '5685668585', 'Kolkata', 'kolkata', NULL, NULL, '101', '41', '713206', NULL, 'Active', 'Teacher', NULL, NULL, '2021-12-15 10:50:04', '2021-12-15 10:51:39'),
+(6, 'Teacher', NULL, 'teacher1@gmail.com', NULL, '$2y$10$wsM2sE89ai8/Ne8kwSWvxOVD7iqEsCHby2uphgQCTIiFdcCIpZdwm', 'P6QDGLEm2C0YBxjFVUlI4yJdKKiSShjNgCadDHfPVVpmrW5AH24GDo3PedUn', '8565874584', 'Kolkata', 'Kolkata', NULL, NULL, '1', '42', '855856', NULL, 'Active', 'Teacher', NULL, NULL, '2021-12-16 11:48:26', '2021-12-16 11:48:26');
 
 -- --------------------------------------------------------
 
@@ -4713,13 +4748,6 @@ CREATE TABLE `users_subscriptions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users_subscriptions`
---
-
-INSERT INTO `users_subscriptions` (`id`, `user_id`, `subscription_id`, `subscription_details`, `purchase_date`, `start_date`, `end_date`, `total_price`, `payment_status`, `txn_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 5, 1, '{}', '2021-12-16', '2021-12-16', '2022-01-16', 1000.00, 'Completed', 'dsfxfx', 'Active', '2021-12-16 10:34:57', '2021-12-16 10:34:57');
-
---
 -- Indexes for dumped tables
 --
 
@@ -4728,6 +4756,13 @@ INSERT INTO `users_subscriptions` (`id`, `user_id`, `subscription_id`, `subscrip
 --
 ALTER TABLE `countries`
   ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `coupons`
+--
+ALTER TABLE `coupons`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `coupons_coupon_code_unique` (`coupon_code`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -4857,6 +4892,12 @@ ALTER TABLE `countries`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=247;
 
 --
+-- AUTO_INCREMENT for table `coupons`
+--
+ALTER TABLE `coupons`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -4884,13 +4925,13 @@ ALTER TABLE `group_questions`
 -- AUTO_INCREMENT for table `levels`
 --
 ALTER TABLE `levels`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -4926,13 +4967,13 @@ ALTER TABLE `subscription_plans`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users_subscriptions`
 --
 ALTER TABLE `users_subscriptions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

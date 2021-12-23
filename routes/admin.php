@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Facades\Route;
+
 Route::group(['as'=>'admin::','prefix'=>'admin','middleware' => ['role:admin']], function () {
     Route::get('/dashboard','Admin\Dashboard\DashboardController@dashboard')->name('dashboard');
     Route::get('changePassForm','Admin\AdminController@changePassForm')->name('changePassForm');
@@ -44,6 +47,15 @@ Route::group(['as'=>'admin::','prefix'=>'admin','middleware' => ['role:admin']],
     Route::get('delete-question-level/{id}','Admin\LevelController@delete')->name('deleteQuestionLevel');
     Route::post('active-inactive-question-level/','Admin\LevelController@status')->name('QuestionLevelStatus');
     /* Question Level route end*/
+     /* Coupon route start*/
+     Route::get('manage-coupons','Admin\CouponController@index')->name('manageCoupon');
+     Route::get('add-coupon','Admin\CouponController@add')->name('addCoupon');
+     Route::post('save-coupon','Admin\CouponController@save')->name('saveCoupon');
+     Route::get('edit-coupon/{id}','Admin\CouponController@edit')->name('editCoupon');
+     Route::post('update-coupon/{id}','Admin\CouponController@update')->name('updateCoupon');
+     Route::get('delete-coupon/{id}','Admin\CouponController@delete')->name('deleteCoupon');
+     Route::post('active-inactive-coupon/','Admin\CouponController@status')->name('CouponStatus');
+     /*Coupon route end*/
 
     /* User Subscription route start */
     Route::get('manage-teacher-subscription','Admin\UserSubscriptionController@index')->name('manageUserSubscription');

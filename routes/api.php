@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,8 @@ use Illuminate\Http\Request;
 Route::group(['prefix'=>'v1','middleware'=>'ApiMiddleWare'], function () {
     Route::get('/get-countries','Api\RegistrationController@getCountries');
     Route::get('/get-states/{country_id}','Api\RegistrationController@getStates');
+    Route::get('/get-coupons','Api\DataController@getCoupons');
+    Route::post('/validate-coupon','Api\DataController@validateCoupon');
     /* Login Register Route start here*/
     Route::post('/register','Api\RegistrationController@signup');
     Route::post('/login','Api\RegistrationController@signin');

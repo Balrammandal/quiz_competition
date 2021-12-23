@@ -31,35 +31,28 @@ class RegistrationController extends Controller
     public function signup(Request $request)
     {
         $msg = [
-            'name.required' => 'Enter Name',
-            'email.required' => 'Enter Email',
+            'name.required' => 'Enter Name.',
+            'username.required' => 'Enter Username.',
+            'username.unique' => 'Username already taken.',
+            'email.required' => 'Enter Email.',
             'email.unique' => 'Email already exist.',
-            'phone.required' => 'Enter Phone Number',
-            'address.required' => 'Enter Address',
-            'city.required' => 'Enter City',
-            'country_id.required' => 'Select Country',
-            'state_id.required' => 'Select State',
-            'zip_code.required' => 'Enter Zip Code',
+            'phone.required' => 'Enter Phone Number.',
+            'user_type.required' => 'Select account type.'
         ];
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'username' => 'required|unique:users',
             'email' => 'required|unique:users',
             'phone' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'country_id' => 'required',
-            'state_id' => 'required',
-            'zip_code' => 'required'
+            'user_type' => 'required'
         ], $msg);
         if ($validator->passes()) {
             DB::beginTransaction();
             try {
                 $data = $request->all();
                 $data["password"] = bcrypt('123456');
-                $data["user_type"] = "Teacher";
                 $data["api_token"] = Str::random(60);
                 $user=User::create($data);
-                $user->assignRole(['teacher']);
                 $msg = 'Registration successful! Please see your Inbox or Junk mail folder for a confirmation email from info@zytrio.com and follow the email instructions to activate your account.';
                 DB::commit();
                 $data=$user;

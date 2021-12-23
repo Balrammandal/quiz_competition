@@ -60,6 +60,14 @@ $segment= Request::segment(2);
                     {{--</a>--}}
                 {{--</li>--}}
                 <li class="nav-item">
+                    <a href="{{route('admin::manageCoupon')}}" class="nav-link @if($segment=='manage-coupons') active @endif">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p>
+                            Manage Coupons
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('admin::manageUserSubscription')}}" class="nav-link @if($segment=='manage-teacher-subscription') active @endif">
                         <i class="nav-icon fas fa-list"></i>
                         <p>
