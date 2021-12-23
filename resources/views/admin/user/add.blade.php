@@ -65,7 +65,6 @@
                                             <select class="form-control" name="user_type" id="user_type">
                                               <option value="">Select Account Type</option>
                                               <option value="Teacher">Teacher</option>
-                                              <option value="User">User</option>
                                               <option value="Students">Students</option>
                                               <option value="Other">Other</option>
                                             </select>
