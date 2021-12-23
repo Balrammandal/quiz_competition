@@ -66,7 +66,6 @@
                                             <select class="form-control" name="user_type" id="user_type">
                                                 <option value="">Select Account Type</option>
                                                 <option value="Teacher" @if($userById->user_type=="Teacher") selected @endif>Teacher</option>
-                                                <option value="User" @if($userById->user_type=="User") selected @endif>User</option>
                                                 <option value="Students" @if($userById->user_type=="Students") selected @endif>Students</option>
                                                 <option value="Other" @if($userById->user_type=="Other") selected @endif>Other</option>
                                             </select>
