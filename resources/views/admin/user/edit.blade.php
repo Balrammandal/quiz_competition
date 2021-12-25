@@ -61,6 +61,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="col-md-3 control-label">Speciality</label>
+                                        <div class="col-md-6">
+                                            <textarea class="form-control" name="speciality"
+                                                   placeholder="Enter Teacher Speciality">{{$userById->speciality}}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-md-3 control-label">Account Type <span class="required_mark">*</span></label>
                                         <div class="col-md-6">
                                             <select class="form-control" name="user_type" id="user_type">
@@ -71,16 +78,14 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label">Marital Status <span class="required_mark">*</span></label>
-                                        <div class="col-md-6">
-                                            <select class="form-control" name="marital_status" id="marital_status" value="{{$userById->marital_status}}">
-                                                <option value="">Select Marital Status</option>
-                                                <option value="Married" @if($userById->marital_status=="Married") selected @endif>Married</option>
-                                                <option value="Unmarried"  @if($userById->marital_status=="Unmarried") selected @endif>Unmarried</option>
-                                            </select>
-                                        </div>
+                                   <div class="form-group">
+                                    <label class="col-md-3 control-label">Password (If want to update)</label>
+                                    <div class="col-md-6">
+                                        <input type="password" class="form-control" name="password" value="{{old('password')}}"
+                                               placeholder="Enter user password"/>
                                     </div>
+                                   </div>
+                                    
                                     {{--<div class="form-group">--}}
                                         {{--<label class="col-md-3 control-label">Address <span class="required_mark">*</span></label>--}}
                                         {{--<div class="col-md-6">--}}

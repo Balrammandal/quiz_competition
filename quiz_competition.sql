@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 23, 2021 at 06:15 PM
+-- Generation Time: Dec 25, 2021 at 12:58 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.14
 
@@ -299,6 +299,7 @@ CREATE TABLE `coupons` (
   `coupon_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `discount_type` enum('Flat','Percentage') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Flat',
   `amount` double(8,2) NOT NULL DEFAULT 0.00,
+  `applied_count` int(20) NOT NULL DEFAULT 0,
   `status` enum('Active','Inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -308,9 +309,9 @@ CREATE TABLE `coupons` (
 -- Dumping data for table `coupons`
 --
 
-INSERT INTO `coupons` (`id`, `coupon_code`, `discount_type`, `amount`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'FLAT10', 'Flat', 10.00, 'Active', '2021-12-23 11:07:42', '2021-12-23 11:09:22'),
-(2, 'SAVE10', 'Percentage', 10.00, 'Active', '2021-12-23 11:07:57', '2021-12-23 11:07:57');
+INSERT INTO `coupons` (`id`, `coupon_code`, `discount_type`, `amount`, `applied_count`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'FLAT10', 'Flat', 10.00, 0, 'Active', '2021-12-23 11:07:42', '2021-12-23 11:09:22'),
+(2, 'SAVE10', 'Percentage', 10.00, 0, 'Active', '2021-12-23 11:07:57', '2021-12-23 11:07:57');
 
 -- --------------------------------------------------------
 
@@ -4708,6 +4709,7 @@ CREATE TABLE `users` (
   `state_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `zip_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `speciality` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` enum('Active','Inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Active',
   `user_type` enum('Admin','Teacher','Students','Other') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Teacher',
   `marital_status` enum('Married','Unmarried') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -4720,10 +4722,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `password`, `api_token`, `phone`, `address`, `city`, `latitude`, `longitude`, `country_id`, `state_id`, `zip_code`, `image`, `status`, `user_type`, `marital_status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$u2EmvIMPnbXqOsA9wNYnZul9xK3TgXg6Jqw1vc2j1qFhnqiSHgA2m', NULL, '1234567890', 'Durgapur', NULL, '10.1010', '12.1010', NULL, NULL, NULL, NULL, 'Active', 'Admin', NULL, 'tWi38fRgcU7dRS6nUliy2Tkf0tfMb7YJi4Z7L9a7szTMU5tnRNDnN5xWFhlE', '2021-12-14 12:07:54', '2021-12-14 12:25:16'),
-(5, 'Teacher 1', NULL, 'teacher@gmail.com', NULL, '$2y$10$YNaC8JolmnisrFpsodjsgeeKrcUSwmhuzVhXailz4VsuU8BwPKZSa', 'aIL4yspjf9ykpJwGHWItKalU2Kx1fww7d79kk65Zi3TMj9cROeLWIkcmCZEG', '5685668585', 'Kolkata', 'kolkata', NULL, NULL, '101', '41', '713206', NULL, 'Active', 'Teacher', NULL, NULL, '2021-12-15 10:50:04', '2021-12-15 10:51:39'),
-(6, 'Teacher', NULL, 'teacher1@gmail.com', NULL, '$2y$10$wsM2sE89ai8/Ne8kwSWvxOVD7iqEsCHby2uphgQCTIiFdcCIpZdwm', 'P6QDGLEm2C0YBxjFVUlI4yJdKKiSShjNgCadDHfPVVpmrW5AH24GDo3PedUn', '8565874584', 'Kolkata', 'Kolkata', NULL, NULL, '1', '42', '855856', NULL, 'Active', 'Teacher', NULL, NULL, '2021-12-16 11:48:26', '2021-12-16 11:48:26');
+INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `password`, `api_token`, `phone`, `address`, `city`, `latitude`, `longitude`, `country_id`, `state_id`, `zip_code`, `image`, `speciality`, `status`, `user_type`, `marital_status`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$u2EmvIMPnbXqOsA9wNYnZul9xK3TgXg6Jqw1vc2j1qFhnqiSHgA2m', NULL, '1234567890', 'Durgapur', NULL, '10.1010', '12.1010', NULL, NULL, NULL, NULL, NULL, 'Active', 'Admin', NULL, 'tWi38fRgcU7dRS6nUliy2Tkf0tfMb7YJi4Z7L9a7szTMU5tnRNDnN5xWFhlE', '2021-12-14 12:07:54', '2021-12-14 12:25:16'),
+(5, 'Teacher 1', 'Admin@gmail.com', 'teacher@gmail.com', NULL, '$2y$10$9l2EOMD2mZSeIqoG/D5cc.goHNaLrRlhK3vcwVN8BbHUnQQ.3tSzC', 'aIL4yspjf9ykpJwGHWItKalU2Kx1fww7d79kk65Zi3TMj9cROeLWIkcmCZEG', '5685668585', 'Kolkata', 'kolkata', NULL, NULL, '101', '41', '713206', NULL, 'Science', 'Active', 'Teacher', NULL, NULL, '2021-12-15 10:50:04', '2021-12-25 06:24:16'),
+(6, 'Teacher', 'teacher123', 'teacher1@gmail.com', NULL, '$2y$10$wsM2sE89ai8/Ne8kwSWvxOVD7iqEsCHby2uphgQCTIiFdcCIpZdwm', 'P6QDGLEm2C0YBxjFVUlI4yJdKKiSShjNgCadDHfPVVpmrW5AH24GDo3PedUn', '8565874584', 'Kolkata', 'Kolkata', NULL, NULL, '1', '42', '855856', NULL, 'Maths', 'Active', 'Teacher', NULL, NULL, '2021-12-16 11:48:26', '2021-12-25 06:23:23');
 
 -- --------------------------------------------------------
 
@@ -4967,7 +4969,7 @@ ALTER TABLE `subscription_plans`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users_subscriptions`

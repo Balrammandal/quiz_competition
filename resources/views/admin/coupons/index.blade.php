@@ -42,6 +42,7 @@
                                 <th>Coupon Code</th>
                                 <th>Discount Amount</th>
                                 <th>Discount Type</th>
+                                <th>Total Used Count</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -66,6 +67,7 @@
                     {data: 'coupon_code', name: 'coupon_code'},
                     {data: 'amount', name: 'amount'},
                     {data: 'discount_type', name: 'discount_type'},
+                    {data: 'applied_count', name: 'applied_count'},
                     {data: 'action', name: 'action', orderable: false, searchable: true}
                 ],
                 "order": [[0,'desc']],

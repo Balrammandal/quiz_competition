@@ -68,7 +68,7 @@ class UserController extends Controller
                 'email.unique' => 'Email already exist.',
                 'phone.required' => 'Enter Phone Number',
                 'user_type.required' => 'Select Account Type',
-                'marital_status.required' => 'Select Marital Status',
+                'password.required' => 'Enter password',
 
             ];
             $this->validate($request, [
@@ -77,10 +77,10 @@ class UserController extends Controller
                 'email' => 'required|unique:users',
                 'phone' => 'required',
                 'user_type' => 'required',
-                'marital_status' => 'required',
+                'password' => 'required',
             ], $msg);
             $data = $request->except('_token');
-            $data["password"] = bcrypt('123456');
+            $data["password"] = bcrypt($request->get('password'));
             $data["api_token"] = Str::random(60);
             $user = User::create($data);
         //    $admin = new Role();
@@ -105,15 +105,20 @@ class UserController extends Controller
             'email.unique' => 'Email already exist.',
             'phone.required' => 'Enter Phone Number',
             'user_type.required' => 'Select Account Type',
-            'marital_status.required' => 'Select Marital Status',
         ];
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|unique:users,id,'.$id,
             'phone' => 'required',
+            'user_type' => 'required',
         ], $msg);
-        $data = $request->except('_token');
+        $data = $request->except('_token','password');
         User::where('id',$id)->update($data);
+        if($request->password!=""){
+            User::where('id',$id)->update([
+               'password' => bcrypt($request->password)
+            ]);
+        }
         return redirect()->back()->with('success', 'User Updated Successfully !!!');
     }
 

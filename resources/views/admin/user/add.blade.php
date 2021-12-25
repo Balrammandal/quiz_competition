@@ -60,33 +60,30 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                         <label class="col-md-3 control-label">Account Type <span class="required_mark">*</span></label>
+                                        <label class="col-md-3 control-label">Speciality</label>
                                         <div class="col-md-6">
-                                            <select class="form-control" name="user_type" id="user_type">
-                                              <option value="">Select Account Type</option>
-                                              <option value="Teacher">Teacher</option>
-                                              <option value="Students">Students</option>
-                                              <option value="Other">Other</option>
-                                            </select>
+                                            <textarea class="form-control" name="speciality"
+                                                   placeholder="Enter Teacher Speciality">{{old('speciality')}}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">Marital Status <span class="required_mark">*</span></label>
-                                        <div class="col-md-6">
-                                            <select class="form-control" name="marital_status" id="marital_status">
-                                                <option value="">Select Marital Status</option>
-                                                <option value="Married">Married</option>
-                                                <option value="Unmarried">Unmarried</option>
-                                            </select>
-                                        </div>
+                                        <label class="col-md-3 control-label">Account Type <span class="required_mark">*</span></label>
+                                       <div class="col-md-6">
+                                           <select class="form-control" name="user_type" id="user_type">
+                                             <option value="">Select Account Type</option>
+                                             <option value="Teacher">Teacher</option>
+                                             <option value="Students">Students</option>
+                                             <option value="Other">Other</option>
+                                           </select>
+                                       </div>
+                                   </div>
+                                   <div class="form-group">
+                                    <label class="col-md-3 control-label">Password <span class="required_mark">*</span></label>
+                                    <div class="col-md-6">
+                                        <input type="password" class="form-control" name="password" value="{{old('password')}}"
+                                               placeholder="Enter user password"/>
                                     </div>
-                                    {{--<div class="form-group">--}}
-                                        {{--<label class="col-md-3 control-label">Address <span class="required_mark">*</span></label>--}}
-                                        {{--<div class="col-md-6">--}}
-                                            {{--<input type="text" class="form-control" name="address" value="{{old('address')}}"--}}
-                                                   {{--placeholder="Enter User Address"/>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
+                                   </div>
                                     {{--<div class="form-group">--}}
                                         {{--<label class="col-md-3 control-label">City <span class="required_mark">*</span></label>--}}
                                         {{--<div class="col-md-6">--}}
