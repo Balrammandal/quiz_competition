@@ -22,7 +22,7 @@ Route::group(['prefix'=>'v1','middleware'=>'ApiMiddleWare'], function () {
     Route::post('/register','Api\RegistrationController@signup');
     Route::post('/login','Api\RegistrationController@signin');
     Route::post('/verify-account', 'Api\RegistrationController@verifyAccount');
-    Route::post('/forget-password','Api\RegistrationController@forgePassword');
+    Route::post('/forget-password','Api\RegistrationController@forgetPassword');
     Route::post('/check-otp', 'Api\RegistrationController@checkOtp');
     Route::post('/reset-password','Api\RegistrationController@resetPassword');
 
